@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState, useCallback, useMemo } from "react";
 
 const HumanoidSection = () => {
   const sectionRef = useRef<HTMLDivElement>(null);
@@ -9,6 +9,12 @@ const HumanoidSection = () => {
   const lastScrollY = useRef(0);
   // Estado para el porcentaje de progreso que se mostrará en las cards y para el gráfico
   const [scrollProgressPercentage, setScrollProgressPercentage] = useState(0);
+  // State for individual card scroll progresses (0 to 1 for each card)
+  const [cardScrollProgresses, setCardScrollProgresses] = useState<number[]>(Array(5).fill(0));
+
+  // Defines the segments of global progress (0-1) for each card's activity period
+  // 5 cards mean 5 segments, defined by 6 thresholds. Example: card 0 progresses from threshold 0 to 1, card 1 from 1 to 2, etc.
+  const cardProgressThresholds = React.useMemo(() => [0, 0.1, 0.2, 0.3, 0.4, 1.0], []); 
 
   // More responsive timing function with shorter duration
   const cardStyle = {
@@ -19,54 +25,71 @@ const HumanoidSection = () => {
     willChange: 'transform, opacity'
   };
 
-  // Helper function to convert degrees to radians
-  const degToRad = (degrees: number): number => {
-    return degrees * (Math.PI / 180);
-  };
+  // Optimized scroll handler using requestAnimationFrame
+  const handleScroll = useCallback(() => {
+    lastScrollY.current = window.scrollY;
+    if (!ticking.current) {
+      window.requestAnimationFrame(() => {
+        if (!sectionRef.current || !isIntersecting) {
+          ticking.current = false;
+          return;
+        }
 
-  // Helper function to convert polar coordinates to Cartesian
-  const polarToCartesian = (centerX: number, centerY: number, radius: number, angleInDegrees: number) => {
-    // Subtract 90 degrees to start at 12 o'clock (top)
-    const angleInRadians = degToRad(angleInDegrees - 90); 
+        const sectionRect = sectionRef.current.getBoundingClientRect();
+        const viewportHeight = window.innerHeight;
+        const totalScrollDistance = viewportHeight * 2.5; // Example: 2.5 times viewport height for scroll
 
-    return {
-      x: centerX + (radius * Math.cos(angleInRadians)),
-      y: centerY + (radius * Math.sin(angleInRadians))
-    };
-  };
+        const progressStartPoint = viewportHeight * 0.2;
+        const progressEndPoint = -totalScrollDistance + (viewportHeight * 0.9);
 
-  // Function to get SVG path data for a pie slice based on percentage
-  const getPieSlicePath = (percentage: number) => {
-    const centerX = 50;
-    const centerY = 50;
-    const radius = 45; // Adjusted radius for a cleaner look within a 100x100 viewBox
+        let currentScrollPosition = sectionRect.top;
+        let progress = (progressStartPoint - currentScrollPosition) / (progressStartPoint - progressEndPoint);
+        progress = Math.max(0, Math.min(1, progress)); // This is the global progress from 0 to 1
 
-    const startAngle = 0; // Starting from 12 o'clock (after polarToCartesian adjustment)
-    const endAngle = (percentage / 100) * 360;
+        setScrollProgressPercentage(Math.round(progress * 100));
 
-    if (percentage === 0) {
-      return ""; // No slice at 0%
+        // Calculate individual card progresses
+        const newCardProgresses = Array(5).fill(0).map((_, index) => {
+          const cardSegmentStart = cardProgressThresholds[index];
+          const cardSegmentEnd = cardProgressThresholds[index + 1];
+          let cardSpecificProgress = 0;
+
+          // If global progress is past this card's segment, it's fully scrolled
+          if (progress >= cardSegmentEnd) {
+            cardSpecificProgress = 1;
+          // If global progress is within this card's segment
+          } else if (progress > cardSegmentStart && progress < cardSegmentEnd) {
+            const segmentDuration = cardSegmentEnd - cardSegmentStart;
+            // Avoid division by zero if thresholds are the same (should not happen with current setup)
+            if (segmentDuration > 0) {
+              cardSpecificProgress = (progress - cardSegmentStart) / segmentDuration;
+            }
+          // If global progress is before this card's segment, it's not scrolled yet (implicitly 0)
+          } else {
+            cardSpecificProgress = 0;
+          }
+          return Math.max(0, Math.min(1, cardSpecificProgress)); // Clamp between 0 and 1
+        });
+        setCardScrollProgresses(newCardProgresses);
+
+        // Determine which card is active based on global scroll progress
+        // The active card is the first one whose segment start threshold has been passed
+        let newActiveCardIndex = 4; // Default to last card if progress is 1
+        for (let i = 0; i < cardProgressThresholds.length - 1; i++) {
+          if (progress < cardProgressThresholds[i + 1]) {
+            newActiveCardIndex = i;
+            break;
+          }
+        }
+        setActiveCardIndex(newActiveCardIndex);
+
+        ticking.current = false;
+      });
+      ticking.current = true;
     }
-    if (percentage === 100) {
-      // Path for a full circle to ensure it's rendered correctly at 100%
-      return `M ${centerX},${centerY} m -${radius}, 0 a ${radius},${radius} 0 1,0 ${radius * 2},0 a ${radius},${radius} 0 1,0 -${radius * 2},0 Z`;
-    }
+  }, [isIntersecting, setScrollProgressPercentage, setActiveCardIndex, setCardScrollProgresses, cardProgressThresholds]);
 
-    const start = polarToCartesian(centerX, centerY, radius, endAngle);
-    const end = polarToCartesian(centerX, centerY, radius, startAngle);
-
-    // If the arc is greater than 180 degrees, set largeArcFlag to 1
-    const largeArcFlag = endAngle - startAngle <= 180 ? "0" : "1";
-
-    return [
-      `M ${centerX},${centerY}`, // Move to center of the circle
-      `L ${end.x},${end.y}`,   // Line from center to the start of the arc (top center initially)
-      `A ${radius},${radius} 0 ${largeArcFlag} 1 ${start.x},${start.y}`, // Arc path
-      `Z` // Close path back to the center, forming a pie slice
-    ].join(" ");
-  };
-
-
+  // useEffect for scroll handling and intersection observer
   useEffect(() => {
     // Create intersection observer to detect when section is in view
     const observer = new IntersectionObserver(
@@ -81,63 +104,6 @@ const HumanoidSection = () => {
       observer.observe(sectionRef.current);
     }
     
-    // Optimized scroll handler using requestAnimationFrame
-    const handleScroll = () => {
-      if (!ticking.current) {
-        lastScrollY.current = window.scrollY;
-        
-        window.requestAnimationFrame(() => {
-          if (!sectionRef.current) return;
-          
-          const sectionRect = sectionRef.current.getBoundingClientRect();
-          const viewportHeight = window.innerHeight;
-          // totalScrollDistance es la distancia de scroll sobre la cual calculamos el progreso.
-          // Si la última tarjeta se activa al 40% del progreso, y queremos que eso ocurra
-          // cerca del final del scroll "artificial", ajustamos esta distancia.
-          // Para que la última tarjeta (índice 4, progreso 0.4) sea visible,
-          // sectionRect.top debe ser aproximadamente -0.8 * viewportHeight.
-          // La altura total del scroll "artificial" es aproximadamente
-          // (Altura del div principal) - (Altura de la sección sticky).
-          // Necesitamos que esa diferencia sea ~0.8 * viewportHeight.
-          // Como la sección sticky es 125vh y la viewportHeight es 100vh,
-          // 0.8 * 100vh = 80vh.
-          // Altura del div principal = 80vh + 125vh = 205vh.
-          // Usamos 220vh para dar un pequeño margen después de que la última tarjeta sea visible.
-          const totalScrollDistance = viewportHeight * 2; 
-          
-          // Calculate the scroll progress for cards
-          let progress = 0;
-          if (sectionRect.top <= 0) {
-            progress = Math.min(2, Math.max(0, Math.abs(sectionRect.top) / totalScrollDistance));
-          }
-          
-          // Determine which card should be visible based on progress
-          if (progress >= 0.4) {
-            setActiveCardIndex(4);
-          } else if (progress >= 0.3) {
-            setActiveCardIndex(3);
-          } else if (progress >= 0.2) {
-            setActiveCardIndex(2);
-          } else if (progress >= 0.1) {
-            setActiveCardIndex(1);
-          } else {
-            setActiveCardIndex(0);
-          }
-
-          // Calculate progress for the number display and pie chart.
-          // The artificial scroll takes place while sectionRect.top goes from 0 to about -0.8 * viewportHeight.
-          // We want the progress bar to go from 0% when progress is 0, to 100% when progress is 0.4.
-          const currentProgress = Math.min(100, Math.max(0, (progress / 0.4) * 100));
-          // Redondea el porcentaje para una mejor visualización.
-          setScrollProgressPercentage(Math.round(currentProgress));
-          
-          ticking.current = false;
-        });
-        
-        ticking.current = true;
-      }
-    };
-
     window.addEventListener('scroll', handleScroll, { passive: true });
     handleScroll(); // Initial calculation
     
@@ -147,10 +113,10 @@ const HumanoidSection = () => {
         observer.unobserve(sectionRef.current);
       }
     };
-  }, []);
+  }, [isIntersecting, handleScroll]);
 
   // Card visibility based on active index instead of direct scroll progress
-  const isFirstCardVisible = isIntersecting;
+  const isFirstCardVisible = activeCardIndex === 0;
   const isSecondCardVisible = activeCardIndex >= 1;
   const isThirdCardVisible = activeCardIndex >= 2;
   const isFourthCardVisible = activeCardIndex >= 3;
@@ -160,14 +126,9 @@ const HumanoidSection = () => {
     <div 
       ref={sectionRef} 
       className="relative" 
-      // Se ha ajustado la altura del div principal de 500vh a 220vh.
-      // Esto reduce significativamente la distancia de "scroll artificial"
-      // y hace que el scroll normal de la página se reanude más rápido
-      // después de que la última tarjeta se active.
       style={{ height: '220vh' }}
     >
       <section className="w-full h-[125vh] py-10 md:py-16 sticky top-0 overflow-hidden bg-white" id="why-humanoid">
-        {/* La barra de progreso horizontal anterior ha sido eliminada */}
         
         <div className="container px-6 lg:px-8 mx-auto h-full flex flex-col">
           <div className="mb-2 md:mb-3">
@@ -210,25 +171,16 @@ const HumanoidSection = () => {
                   </h3>
                 </div>
               </div>
-              {/* Indicador de porcentaje y gráfico de pastel en la esquina inferior derecha */}
-              {isFirstCardVisible && (
-                <div className="absolute bottom-4 right-4 z-20">
-                  <div className="inline-flex items-center justify-center px-3 py-1.5 rounded-full bg-white/20 backdrop-blur-sm text-white">
-                    <svg width="24" height="24" viewBox="0 0 100 100" className="mr-2">
-                      {/* Fondo del círculo (el "reloj" vacío) */}
-                      <circle cx="50" cy="50" r="45" fill="none" stroke="currentColor" strokeWidth="10" opacity="0.3" />
-                      {/* La porción del pastel que se llena */}
-                      <path
-                        d={getPieSlicePath(scrollProgressPercentage)}
-                        fill="currentColor"
-                        // La opacidad puede ajustarse para que sea más visible o sutil
-                        opacity="0.8" 
-                      />
-                    </svg>
-                    <span className="text-sm font-medium">{scrollProgressPercentage}%</span>
-                  </div>
-                </div>
-              )}
+              {/* Vertical Progress Bar */}
+              <div className="absolute top-8 right-8 bottom-8 w-1.5 bg-white/20 backdrop-blur-sm pointer-events-none rounded-full overflow-hidden">
+                <div
+                  className="bg-white w-full"
+                  style={{
+                    height: `${cardScrollProgresses[0] * 100}%`,
+                    transition: 'height 50ms linear',
+                  }}
+                />
+              </div>
             </div>
             
             {/* Second Card */}
@@ -263,22 +215,16 @@ const HumanoidSection = () => {
                   <span className="text-[#1d3451]">a platform to scale</span> their creative transformation of discarded textiles into unique fashion                  </h3>
                 </div>
               </div>
-              {/* Indicador de porcentaje y gráfico de pastel en la esquina inferior derecha */}
-              {isSecondCardVisible && (
-                <div className="absolute bottom-4 right-4 z-20">
-                  <div className="inline-flex items-center justify-center px-3 py-1.5 rounded-full bg-white/20 backdrop-blur-sm text-white">
-                    <svg width="24" height="24" viewBox="0 0 100 100" className="mr-2">
-                      <circle cx="50" cy="50" r="45" fill="none" stroke="currentColor" strokeWidth="10" opacity="0.3" />
-                      <path
-                        d={getPieSlicePath(scrollProgressPercentage)}
-                        fill="currentColor"
-                        opacity="0.8" 
-                      />
-                    </svg>
-                    <span className="text-sm font-medium">{scrollProgressPercentage}%</span>
-                  </div>
-                </div>
-              )}
+              {/* Vertical Progress Bar */}
+              <div className="absolute top-8 right-8 bottom-8 w-1.5 bg-white/20 backdrop-blur-sm pointer-events-none rounded-full overflow-hidden">
+                <div
+                  className="bg-white w-full"
+                  style={{
+                    height: `${cardScrollProgresses[1] * 100}%`,
+                    transition: 'height 50ms linear',
+                  }}
+                />
+              </div>
             </div>
             
             {/* Third Card */}
@@ -314,22 +260,16 @@ const HumanoidSection = () => {
                   </h3>
                 </div>
               </div>
-              {/* Indicador de porcentaje y gráfico de pastel en la esquina inferior derecha */}
-              {isThirdCardVisible && (
-                <div className="absolute bottom-4 right-4 z-20">
-                  <div className="inline-flex items-center justify-center px-3 py-1.5 rounded-full bg-white/20 backdrop-blur-sm text-white">
-                    <svg width="24" height="24" viewBox="0 0 100 100" className="mr-2">
-                      <circle cx="50" cy="50" r="45" fill="none" stroke="currentColor" strokeWidth="10" opacity="0.3" />
-                      <path
-                        d={getPieSlicePath(scrollProgressPercentage)}
-                        fill="currentColor"
-                        opacity="0.8" 
-                      />
-                    </svg>
-                    <span className="text-sm font-medium">{scrollProgressPercentage}%</span>
-                  </div>
-                </div>
-              )}
+              {/* Vertical Progress Bar */}
+              <div className="absolute top-8 right-8 bottom-8 w-1.5 bg-white/20 backdrop-blur-sm pointer-events-none rounded-full overflow-hidden">
+                <div
+                  className="bg-white w-full"
+                  style={{
+                    height: `${cardScrollProgresses[2] * 100}%`,
+                    transition: 'height 50ms linear',
+                  }}
+                />
+              </div>
             </div>
 
             {/* Fourth Card */}
@@ -365,22 +305,16 @@ const HumanoidSection = () => {
                   </h3>
                 </div>
               </div>
-              {/* Indicador de porcentaje y gráfico de pastel en la esquina inferior derecha */}
-              {isFourthCardVisible && (
-                <div className="absolute bottom-4 right-4 z-20">
-                  <div className="inline-flex items-center justify-center px-3 py-1.5 rounded-full bg-white/20 backdrop-blur-sm text-white">
-                    <svg width="24" height="24" viewBox="0 0 100 100" className="mr-2">
-                      <circle cx="50" cy="50" r="45" fill="none" stroke="currentColor" strokeWidth="10" opacity="0.3" />
-                      <path
-                        d={getPieSlicePath(scrollProgressPercentage)}
-                        fill="currentColor"
-                        opacity="0.8" 
-                      />
-                    </svg>
-                    <span className="text-sm font-medium">{scrollProgressPercentage}%</span>
-                  </div>
-                </div>
-              )}
+              {/* Vertical Progress Bar */}
+              <div className="absolute top-8 right-8 bottom-8 w-1.5 bg-white/20 backdrop-blur-sm pointer-events-none rounded-full overflow-hidden">
+                <div
+                  className="bg-white w-full"
+                  style={{
+                    height: `${cardScrollProgresses[3] * 100}%`,
+                    transition: 'height 50ms linear',
+                  }}
+                />
+              </div>
             </div>
 
             {/* Fifth Card */}
@@ -415,22 +349,16 @@ const HumanoidSection = () => {
                   the foundational infrastructure for <span className="text-[#1d3451] px-2 py-1">a regenerative fashion industry, where existing materials are the new standard</span>, and circularity is paramount.                  </h3>
                 </div>
               </div>
-              {/* Indicador de porcentaje y gráfico de pastel en la esquina inferior derecha */}
-              {isFifthCardVisible && (
-                <div className="absolute bottom-4 right-4 z-20">
-                  <div className="inline-flex items-center justify-center px-3 py-1.5 rounded-full bg-white/20 backdrop-blur-sm text-white">
-                    <svg width="24" height="24" viewBox="0 0 100 100" className="mr-2">
-                      <circle cx="50" cy="50" r="45" fill="none" stroke="currentColor" strokeWidth="10" opacity="0.3" />
-                      <path
-                        d={getPieSlicePath(scrollProgressPercentage)}
-                        fill="currentColor"
-                        opacity="0.8" 
-                      />
-                    </svg>
-                    <span className="text-sm font-medium">{scrollProgressPercentage}%</span>
-                  </div>
-                </div>
-              )}
+              {/* Vertical Progress Bar */}
+              <div className="absolute top-8 right-8 bottom-8 w-1.5 bg-white/20 backdrop-blur-sm pointer-events-none rounded-full overflow-hidden">
+                <div
+                  className="bg-white w-full"
+                  style={{
+                    height: `${cardScrollProgresses[4] * 100}%`,
+                    transition: 'height 50ms linear',
+                  }}
+                />
+              </div>
             </div>
           </div>
         </div>
