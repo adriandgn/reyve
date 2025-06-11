@@ -82,20 +82,6 @@ const SpecsSection = () => {
         </div>
       </div>
     </section>
-    
-    <section className="w-full min-h-screen flex items-center bg-white py-6 sm:py-10" id="specifications">
-      <div className="container px-4 sm:px-6 lg:px-8 mx-auto">
-      
-        {/* Main content with text mask image - responsive text sizing */}
-        <div className="max-w-5xl pl-4 sm:pl-8">
-  <h2 className="text-4xl md:text-6xl lg:text-6xl xl:text-7xl font-display leading-tight mb-8">
-    <span className="block bg-clip-text text-transparent bg-[url('/grad-3.jpg')] bg-cover bg-center" style={{ letterSpacing: -4, lineHeight: 0.8, fontWeight: 'bold' }}>
-      Re:YVE is an <br />apparel life-extension<br /> platform helping <br />fashion brands <span className="block bg-clip-text text-transparent bg-[url('/text-mask-image.jpg')] bg-cover bg-center">revive zero value <br />stock into profits.</span>
-    </span>
-  </h2>
-</div>
-      </div>
-    </section>  
   </>
   );
 };

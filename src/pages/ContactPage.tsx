@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Helmet } from 'react-helmet';
 import { motion } from 'framer-motion';
 import { cn } from "@/lib/utils";
@@ -6,8 +6,52 @@ import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import { Mail, MapPin, Phone, Send } from 'lucide-react';
 import RegenerateBanner from '@/components/shared/RegenerateBanner';
+import Newsletter from '@/components/shared/Newsletter';
 
 const ContactPage = () => {
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [result, setResult] = useState<string | null>(null);
+
+  const accessKey = import.meta.env.VITE_WEB3FORMS_ACCESS_KEY;
+
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    setIsSubmitting(true);
+    setResult(null); // Clear previous result
+
+    if (!accessKey) {
+      setResult("Access Key is missing. Please configure it in your .env file.");
+      setIsSubmitting(false);
+      return;
+    }
+
+    const formData = new FormData(event.currentTarget);
+    formData.append("access_key", accessKey);
+    formData.append("subject", "New message from Re:YVE Contact Form"); // Differentiates from Book a Demo
+
+    try {
+      const res = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        body: formData
+      });
+
+      const json = await res.json();
+
+      if (json.success) {
+        setResult("Message sent successfully! We will get back to you shortly.");
+        (event.target as HTMLFormElement).reset();
+      } else {
+        console.error("Web3Forms API Error:", json);
+        setResult(json.message || "An error occurred while sending the message. Please try again.");
+      }
+    } catch (error) {
+      console.error("Form submission error:", error);
+      setResult("An error occurred while sending the message. Please try again.");
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
   useEffect(() => {
     window.scrollTo(0, 0);
     
@@ -119,33 +163,11 @@ const ContactPage = () => {
                       </div>
                       <div>
                         <h3 className="text-lg font-medium text-gray-900">Email Us</h3>
-                        <p className="text-gray-600">info@re-yve.com</p>
+                        <p className="text-gray-600">anamaria@wereyve.com</p>
                         <p className="text-sm text-gray-500 mt-1">We'll respond within 24 hours</p>
                       </div>
                     </div>
-
-                    <div className="flex items-start space-x-4">
-                      <div className="flex-shrink-0 w-12 h-12 bg-brand-50 rounded-full flex items-center justify-center text-brand-600">
-                        <Phone className="w-6 h-6" />
-                      </div>
-                      <div>
-                        <h3 className="text-lg font-medium text-gray-900">Call Us</h3>
-                        <p className="text-gray-600">+1 (555) 123-4567</p>
-                        <p className="text-sm text-gray-500 mt-1">Mon-Fri from 9am to 5pm</p>
-                      </div>
-                    </div>
-
-                    <div className="flex items-start space-x-4">
-                      <div className="flex-shrink-0 w-12 h-12 bg-brand-50 rounded-full flex items-center justify-center text-brand-600">
-                        <MapPin className="w-6 h-6" />
-                      </div>
-                      <div>
-                        <h3 className="text-lg font-medium text-gray-900">Visit Us</h3>
-                        <p className="text-gray-600">123 Fashion Avenue</p>
-                        <p className="text-gray-600">Berlin, 10115</p>
-                        <p className="text-gray-600">Germany</p>
-                      </div>
-                    </div>
+                    <Newsletter />
                   </div>
                 </div>
 
@@ -158,7 +180,7 @@ const ContactPage = () => {
                   transition={{ duration: 0.6 }}
                 >
                   <h3 className="text-2xl font-bold text-gray-900 mb-6" style={{  fontFamily: 'Brockmann, Inter, sans-serif', color: 'black' }}>Send us a message</h3>
-                  <form className="space-y-6">
+                  <form onSubmit={handleSubmit} className="space-y-6">
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                       <div>
                         <label htmlFor="first-name" className="block text-sm font-medium text-gray-700 mb-1">
@@ -166,7 +188,7 @@ const ContactPage = () => {
                         </label>
                         <input
                           type="text"
-                          id="first-name"
+                          id="first-name" name="first_name"
                           className="w-full px-6 py-4 rounded-full border border-gray-200 focus:outline-none focus:ring-2 focus:ring-brand-500 text-gray-700"
                           placeholder="John"
                         />
@@ -177,7 +199,7 @@ const ContactPage = () => {
                         </label>
                         <input
                           type="text"
-                          id="last-name"
+                          id="last-name" name="last_name"
                           className="w-full px-6 py-4 rounded-full border border-gray-200 focus:outline-none focus:ring-2 focus:ring-brand-500 text-gray-700"
                           placeholder="Doe"
                         />
@@ -190,7 +212,7 @@ const ContactPage = () => {
                       </label>
                       <input
                         type="email"
-                        id="email"
+                        id="email" name="email"
                         className="w-full px-6 py-4 rounded-full border border-gray-200 focus:outline-none focus:ring-2 focus:ring-brand-500 text-gray-700"
                         placeholder="you@example.com"
                       />
@@ -202,7 +224,7 @@ const ContactPage = () => {
                       </label>
                       <input
                         type="text"
-                        id="subject"
+                        id="subject" name="contact_subject"
                         className="w-full px-6 py-4 rounded-full border border-gray-200 focus:outline-none focus:ring-2 focus:ring-brand-500 text-gray-700"
                         placeholder="How can we help you?"
                       />
@@ -213,7 +235,7 @@ const ContactPage = () => {
                         Message
                       </label>
                       <textarea
-                        id="message"
+                        id="message" name="message"
                         rows={5}
                         className="w-full px-6 py-4 rounded-2xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-brand-500 text-gray-700"
                         placeholder="Your message here..."
@@ -221,13 +243,22 @@ const ContactPage = () => {
                     </div>
 
                     <div>
+                                            {/* Honeypot field for spam - recommended by Web3Forms */}
+                      <input type="checkbox" name="botcheck" className="hidden" style={{display: "none"}} />
+
                       <button
                         type="submit"
-                        className="w-full flex items-center justify-center bg-brand-500 hover:bg-brand-600 text-white font-medium py-4 px-10 rounded-full transition-all duration-300"
+                        disabled={isSubmitting}
+                        className="w-full flex items-center justify-center bg-brand-500 hover:bg-brand-600 text-white font-medium py-4 px-10 rounded-full transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
                       >
                         <Send className="w-5 h-5 mr-2" />
-                        Send Message
+                        {isSubmitting ? 'Sending...' : 'Send Message'}
                       </button>
+                      {result && (
+                        <p className={`mt-4 text-center text-sm ${result.includes('successfully') ? 'text-green-600' : 'text-red-600'}`}>
+                          {result}
+                        </p>
+                      )}
                     </div>
                   </form>
                 </motion.div>

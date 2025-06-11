@@ -20,8 +20,7 @@ const RegenerateBanner = () => {
         className="text-3xl md:text-4xl font-extrabold tracking-tight text-white drop-shadow-lg animate-pulse p-0 m-0"
         style={{ fontFamily: 'Brockmann, sans-serif', margin: 0, padding: 0, width: '100%', textAlign: 'center', display: 'block' }}
       >
-        Re:YVE. Regenerate. Reimagine. Revive.
-      </h1>
+Re:YVE: Building a Fashion Longevity Culture Where Every Piece Tells a Story       </h1>
     </div>
   );
 };

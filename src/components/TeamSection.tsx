@@ -8,38 +8,38 @@ const teamMembers = {
     {
       name: 'George Kara',
       role: 'PRODUCT & SUPPLY CHAIN',
-      bio: '20+ years fashion brand operations, product, sales. Nike, Tommy, Zalando.',
-      image: '/profile1.png',
+      bio: '20+ years fashion brand operations & strategy. Global sourcing & product design expert. Sustainabiity innovator ',
+      image: '/profile-george.jpg',
       linkedin: '#'
     },
     {
       name: 'Pailiak Mzikian',
       role: 'PLATFORM & OPERATIONS',
-      bio: '18+ years circular fashion entrepreneur & innovator. Remondis, H&M, Burberry, Adidas.',
-      image: '/profile2.png',
+      bio: '18+ years textile & plastic recycling. Circular fashion entrepreneur, innovator & lecturer',
+      image: '/profile-pailak.jpg',
       linkedin: '#'
     },
     {
       name: 'AnaMaria Quijano-W.',
       role: 'BRAND, GROWTH & EXPERIENCE',
-      bio: '20+ years communications, strategy & sustainability innovation. VW Group, GPS Ventures.',
-      image: '/profile3.png',
+      bio: '20+ years sustainability strategy, communications, investment, org. development',
+      image: '/profile-AnaMaria.jpg',
       linkedin: '#'
     }
   ],
   heroes: [
     {
       name: 'Josefina Coll',
-      role: 'LEAD REDESIGNER (DE)',
+      role: 'REDESIGNER, PRODUCT & STRATEGY',
       bio: '15 years fashion upcycling as atelier owner & B2B influencer.',
       image: '/profile4.png',
       linkedin: '#'
     },
     {
       name: 'Charlotte Duzong',
-      role: 'REDESIGNER (NL)',
+      role: 'FASHION REDESIGNER',
       bio: 'Founder and designer, creative fashion trainer.',
-      image: '/profile9.png',
+      image: '/profile-Charlotte.jpg',
       linkedin: '#'
     },
     {
@@ -47,29 +47,6 @@ const teamMembers = {
       role: 'PRODUCT DESIGNER',
       bio: '15+ years Lead Product & Service Designer. McKinsey.',
       image: '/profile8.jpeg',
-      linkedin: '#'
-    }
-  ],
-  advisors: [
-    {
-      name: 'Luca Coscieme',
-      role: 'SUSTAINABILITY',
-      bio: 'Hot or Cool Institute.',
-      image: '/profile5.png',
-      linkedin: '#'
-    },
-    {
-      name: 'Heini Vartiainen',
-      role: 'FASHION SENIOR BUYER & SUSTAINABILITY',
-      bio: 'Zalando.',
-      image: '/profile6.png',
-      linkedin: '#'
-    },
-    {
-      name: 'Frank Lehmann',
-      role: 'PRODUCT BUILDER & ENTREPRENEUR',
-      bio: 'Holi.',
-      image: '/profile7.png',
       linkedin: '#'
     }
   ]
@@ -90,9 +67,9 @@ const TeamMemberCard = ({ member, category }: { member: any, category: string })
       onHoverEnd={() => setIsHovered(false)}
     >
       {/* Image Container */}
-      <div className="relative pt-[70%] overflow-visible flex items-center justify-center">
+      <div className="pt-5 pb-3 flex justify-center">
         <motion.div 
-          className="absolute left-1/2 top-0 -translate-x-1/2 w-[80%] h-[80%] rounded-full bg-gray-100 shadow-xl border-4 border-white flex items-center justify-center overflow-hidden"
+          className="relative w-32 h-32 rounded-full bg-gray-200 shadow-lg border-2 border-white flex items-center justify-center overflow-hidden"
           animate={{
             scale: isHovered ? 1.07 : 1,
             transition: { duration: 0.5 }
@@ -102,7 +79,7 @@ const TeamMemberCard = ({ member, category }: { member: any, category: string })
           <img
             src={member.image}
             alt={`Photo of ${member.name}`}
-            className="w-full h-full object-cover rounded-full"
+            className="w-full h-full object-cover"
             loading="lazy"
           />
         </motion.div>
@@ -182,18 +159,6 @@ const TeamSection = () => {
           </div>
         </div>
 
-        {/* Advisors */}
-        <div>
-          <h3 className="text-2xl font-bold text-gray-900 mb-8 text-center">Advisors</h3>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-[30px] px-1 max-w-4xl mx-auto" style={{
-            maxWidth: '836px',
-            margin: 'auto'
-          }}>
-            {teamMembers.advisors.map((member, index) => (
-              <TeamMemberCard key={`advisor-${index}`} member={member} category="advisors" />
-            ))}
-          </div>
-        </div>
       </div>
     </section>
   );

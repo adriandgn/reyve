@@ -78,7 +78,7 @@ const Hero = () => {
         <div className="max-w-4xl mx-auto">
           <h1
             className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white p-0 m-0 leading-tight"
-            style={{fontFamily:'Brockmann, Inter, sans-serif', textAlign: 'left' }}>
+            style={{fontFamily:'Brockmann, Inter, sans-serif', textAlign: 'left',letterSpacing: -3 }}>
             <span className="hero-animated-span">Beyond sustainable, </span> <br />
             <span className="hero-animated-span-green">its Regenerative.</span>
           </h1>

@@ -3,14 +3,16 @@ import React, { useEffect } from "react";
 import { Helmet } from "react-helmet";
 import Navbar from "@/components/layout/Navbar";
 import Hero from "@/components/shared/Hero";
+import OneLiner from "@/components/shared/OneLiner";
 import HumanoidSection from "@/components/ui/HumanoidSection";
-import SpecsSection from "@/components/shared/SpecsSection";
-import DetailsSection from "@/components/shared/DetailsSection";
+// import SpecsSection from "@/components/shared/SpecsSection";
+// import DetailsSection from "@/components/shared/DetailsSection";
 import ImageShowcaseSection from "@/components/shared/ImageShowcaseSection";
-import Features from "@/components/shared/Features";
-import Testimonials from "@/components/shared/Testimonials";
+// import Features from "@/components/shared/Features";
+// import Testimonials from "@/components/shared/Testimonials";
 import Newsletter from "@/components/shared/Newsletter";
 import RegenerateBanner from "@/components/shared/RegenerateBanner";
+import KeyAdvantages from "@/components/shared/KeyAdvantages";
 import Footer from "@/components/layout/Footer";
 
 const Index = () => {
@@ -93,9 +95,11 @@ const Index = () => {
         <Navbar />
         <main className="flex-grow">
           <Hero />
+          <OneLiner />
           <HumanoidSection />
-          <SpecsSection />
+          {/* <SpecsSection /> */}
           <ImageShowcaseSection />
+          <KeyAdvantages />
           <Newsletter />
           <RegenerateBanner />
         </main>

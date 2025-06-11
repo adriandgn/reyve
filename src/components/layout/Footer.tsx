@@ -6,20 +6,16 @@ const Footer = () => {
   
   const navigation = {
     company: [
-      { name: 'About Us', href: '#about' },
-      { name: 'Our Mission', href: '#mission' },
-      { name: 'Team', href: '#team' },
-      { name: 'Careers', href: '#careers' },
+      { name: 'Home', href: '/' },
+      { name: 'About Us', href: '/about' },
+      { name: 'Team', href: '/about#team-section' },
     ],
     legal: [
       { name: 'Privacy Policy', href: '/privacy' },
       { name: 'Terms of Service', href: '/terms' },
-      { name: 'Cookie Policy', href: '/cookies' },
     ],
     contact: [
-      { icon: <Mail className="h-5 w-5" />, text: 'info@re-yve.com', href: 'mailto:info@re-yve.com' },
-      { icon: <Phone className="h-5 w-5" />, text: '+34 123 456 789', href: 'tel:+34123456789' },
-      { icon: <MapPin className="h-5 w-5" />, text: 'Berlin, Germany', href: '#' },
+      { icon: <Mail className="h-5 w-5" />, text: 'anamaria@wereyve.com', href: 'mailto:anamaria@wereyve.com' },
     ],
     social: [
       { icon: <Instagram className="h-5 w-5" />, name: 'Instagram', href: '#' },
@@ -117,11 +113,11 @@ const Footer = () => {
               &copy; {currentYear} Re:YVE. All rights reserved.
             </p>
             <div className="mt-4 md:mt-0 flex space-x-6">
-              <a href="#" className="text-gray-400 hover:text-white text-sm transition-colors duration-200">
+              <a href="/terms" className="text-gray-400 hover:text-white text-sm transition-colors duration-200">
                 <span className="sr-only">Terms and Conditions</span>
                 Terms
               </a>
-              <a href="#" className="text-gray-400 hover:text-white text-sm transition-colors duration-200">
+              <a href="/privacy" className="text-gray-400 hover:text-white text-sm transition-colors duration-200">
                 <span className="sr-only">Privacy Policy</span>
                 Privacy
               </a>
