@@ -57,10 +57,10 @@ const BookADemoPage = () => {
         <div className="max-w-4xl mx-auto">
           <div className="text-center mb-12">
             <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4" style={{ fontFamily: 'Brockmann, Inter, sans-serif' }}>
-              Book a Private Demo
+              Book a Demo
             </h1>
             <p className="text-lg sm:text-xl text-gray-600">
-              See our platform in action. <br />
+              See our solution in action. <br />
               Schedule a personalized demo with our team to see how we can help you.
             </p>
           </div>

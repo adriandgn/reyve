@@ -7,7 +7,7 @@ const OneLiner: React.FC = () => {
         <div className="max-w-5xl pl-4 sm:pl-8">
           <h2 className="text-4xl md:text-6xl lg:text-6xl xl:text-7xl font-display md:leading-tight mb-8">
             <span className="color-[#30f534]" style={{ letterSpacing: -3, lineHeight: 0.8, fontWeight: 'bold',color: '#30f534' }}>
-            Re:YVE is a product <br />life-extension platform <br />that enables <span style={{color: '#2c4c71'}}>clothing-to-clothing production at scale<br />  to turn unsold inventory into new revenue.</span>
+            <span style={{color: '#2c4c71'}}> Re:YVE is a product <br />life-extension platform <br />that enables </span>clothing-to-clothing<span style={{color: '#2c4c71'}}> production at scale<br />  to turn unsold inventory into new revenue.</span>
             </span>
           </h2>
         </div>
