@@ -8,46 +8,46 @@ const teamMembers = {
     {
       name: 'George Kara',
       role: 'PRODUCT & SUPPLY CHAIN',
-      bio: '20+ years fashion brand operations & strategy. Global sourcing & product design expert. Sustainabiity innovator ',
+      bio: '20+ years Fashion Brand Operations & Strategy. Global Sourcing & Product Design Expert. Sustainabiity Innovator ',
       image: '/profile-george.jpg',
-      linkedin: '#'
+      linkedin: 'https://www.linkedin.com/in/george-kara/'
     },
     {
       name: 'Pailiak Mzikian',
       role: 'PLATFORM & OPERATIONS',
-      bio: '18+ years textile & plastic recycling. Circular fashion entrepreneur, innovator & lecturer',
+      bio: '18+ years Textile & Plastic Recycling. Circular Fashion Entrepreneur, Innovator & Lecturer',
       image: '/profile-pailak.jpg',
-      linkedin: '#'
+      linkedin: 'https://www.linkedin.com/in/pailiak-mzikian/'
     },
     {
       name: 'AnaMaria Quijano-W.',
       role: 'BRAND, GROWTH & EXPERIENCE',
-      bio: '20+ years sustainability strategy, communications, investment, org. development',
+      bio: '20+ years Sustainability Strategy, Communications, Investment, Org. Development',
       image: '/profile-AnaMaria.jpg',
-      linkedin: '#'
+      linkedin: 'https://www.linkedin.com/in/anamariaquijanow'
     }
   ],
   heroes: [
     {
+      name: 'Adrian Aguirre',
+      role: 'PRODUCT LEAD',
+      bio: '15+ years Product Lead & Product Designer.',
+      image: '/profile8.jpeg',
+      linkedin: 'https://www.linkedin.com/in/adriandgn/'
+    },
+    {
       name: 'Josefina Coll',
       role: 'REDESIGNER, PRODUCT & STRATEGY',
-      bio: '15 years fashion upcycling as atelier owner & B2B influencer.',
+      bio: '15 years Fashion Upcycling as Atelier Owner & B2B Influencer.',
       image: '/profile4.png',
-      linkedin: '#'
+      linkedin: 'https://www.linkedin.com/in/josefinacoll/'
     },
     {
       name: 'Charlotte Duzong',
       role: 'FASHION REDESIGNER',
-      bio: 'Founder and designer, creative fashion trainer.',
+      bio: 'Founder and Designer, Creative Fashion Trainer.',
       image: '/profile-Charlotte.jpg',
-      linkedin: '#'
-    },
-    {
-      name: 'Adrian Aguirre',
-      role: 'PRODUCT DESIGNER',
-      bio: '15+ years Lead Product & Service Designer. McKinsey.',
-      image: '/profile8.jpeg',
-      linkedin: '#'
+      linkedin: 'https://www.linkedin.com/in/charlotteduzong/'
     }
   ]
 };
@@ -84,16 +84,6 @@ const TeamMemberCard = ({ member, category }: { member: any, category: string })
           />
         </motion.div>
         
-        {/* Category Badge */}
-        <div className="absolute top-2 left-2 z-10">
-          <span className={`px-2 py-0.5 rounded-full text-[10px] font-semibold opacity-70 shadow bg-white/80 backdrop-blur border border-white ${
-            category === 'founders' ? 'text-brand-800' :
-            category === 'heroes' ? 'text-amber-800' :
-            'text-purple-800'
-          }`}>
-            {category === 'founders' ? 'Founder' : category === 'heroes' ? 'Team' : 'Advisor'}
-          </span>
-        </div>
       </div>
       
       {/* Content */}
@@ -129,7 +119,7 @@ const TeamSection = () => {
         <div className="text-center max-w-3xl mx-auto mb-16">
           <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4" style={{ fontFamily: 'Brockmann, Inter, sans-serif' }}>Meet the Team</h2>
           <p className="text-lg text-gray-600">
-            Passionate individuals driving Re:YVE's mission to transform fashion through technology and sustainability.
+            Passionate individuals driving Re:YVE's mission to build the infrastructure to turn fashion’s linear product model into a regenerative cycle -from design to after-sale. 
           </p>
         </div>
 

@@ -3,7 +3,7 @@ import React from "react";
 
 const ImageShowcaseSection = () => {
   return (
-    <section className="w-full py-20 bg-gradient-to-b from-white via-circularity-green/10 to-white" id="process">
+    <section className="w-full pb-20 bg-gradient-to-b from-white via-circularity-green/10 to-white" id="process">
       <div className="container px-4 sm:px-6 lg:px-8 mx-auto">
         
         <div className="max-w-3xl mx-auto text-center mb-12 animate-fade-in">

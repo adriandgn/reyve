@@ -3,8 +3,10 @@ import React, { useEffect } from "react";
 import { Helmet } from "react-helmet";
 import Navbar from "@/components/layout/Navbar";
 import Hero from "@/components/shared/Hero";
-import OneLiner from "@/components/shared/OneLiner";
-import HumanoidSection from "@/components/ui/HumanoidSection";
+import SplitContentSection from "@/components/shared/SplitContentSection";
+// Mantenemos estas importaciones por si las necesitamos en el futuro
+// import OneLiner from "@/components/shared/OneLiner";
+// import HumanoidSection from "@/components/ui/HumanoidSection";
 // import SpecsSection from "@/components/shared/SpecsSection";
 // import DetailsSection from "@/components/shared/DetailsSection";
 import ImageShowcaseSection from "@/components/shared/ImageShowcaseSection";
@@ -95,8 +97,7 @@ const Index = () => {
         <Navbar />
         <main className="flex-grow">
           <Hero />
-          <OneLiner />
-          <HumanoidSection />
+          <SplitContentSection />
           {/* <SpecsSection /> */}
           <ImageShowcaseSection />
           <KeyAdvantages />

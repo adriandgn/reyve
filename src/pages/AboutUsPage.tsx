@@ -89,12 +89,9 @@ const AboutUsPage = () => {
                 We are a young startup, but our ambition is gigantic: to make clothing-to-clothing production the industry standard. 
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <button className="bg-brand-500 hover:bg-brand-600 text-white font-medium py-4 px-10 rounded-full transition-all duration-300">
-                  Explore Our Collections
-                </button>
-                <button className="bg-white hover:bg-gray-50 text-brand-600 border-2 border-brand-200 font-medium py-4 px-10 rounded-full transition-all duration-300">
+                <a href="/join-our-team" className="bg-white hover:bg-gray-50 text-brand-600 border-2 border-brand-200 font-medium py-4 px-10 rounded-full transition-all duration-300 inline-block">
                   Join Our Team
-                </button>
+                </a>
               </div>
             </div>
           </div>

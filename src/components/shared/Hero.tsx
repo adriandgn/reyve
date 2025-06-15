@@ -34,7 +34,7 @@ const Hero = () => {
 
   return (
     <section
-      className="relative min-h-screen flex items-center justify-center text-center overflow-hidden"
+      className="relative min-h-[70vh] flex items-center justify-center text-center overflow-hidden"
       style={{ position: 'relative' }}
     >
       {/* Fondo dividido en dos proporciones: 66% y 33% */}

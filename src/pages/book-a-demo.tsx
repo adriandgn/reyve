@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Helmet } from 'react-helmet';
 import Navbar from '@/components/layout/Navbar';
 import Footer from '@/components/layout/Footer';
 import { motion } from 'framer-motion';
@@ -51,8 +52,30 @@ const BookADemoPage = () => {
   };
 
   return (
-    <div className="bg-white text-gray-800">
-      <Navbar />
+    <>
+      <Helmet>
+        <title>Book a Demo | Re:YVE - Schedule Your Personalized Solution Demo</title>
+        <meta name="description" content="Schedule a personalized demo with Re:YVE's team and see our sustainable fashion solutions in action. Discover how we can help transform your approach to circular fashion." />
+        <link rel="canonical" href="https://www.reyve.com/book-a-demo" />
+        <meta name="robots" content="index, follow" />
+        {/* Open Graph */}
+        <meta property="og:title" content="Book a Demo | Re:YVE - Schedule Your Personalized Solution Demo" />
+        <meta property="og:description" content="Schedule a personalized demo with Re:YVE's team and see our sustainable fashion solutions in action. Discover how we can help transform your approach to circular fashion." />
+        <meta property="og:image" content="https://www.reyve.com/images/reyve-og-image-demo.jpg" />
+        <meta property="og:url" content="https://www.reyve.com/book-a-demo" />
+        <meta property="og:type" content="website" />
+        <meta property="og:site_name" content="Re:YVE" />
+        <meta property="og:locale" content="en_US" />
+        {/* Twitter */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:site" content="@ReYVEofficial" />
+        <meta name="twitter:creator" content="@ReYVEofficial" />
+        <meta name="twitter:title" content="Book a Demo | Re:YVE - Schedule Your Personalized Solution Demo" />
+        <meta name="twitter:description" content="Schedule a personalized demo with Re:YVE's team and see our sustainable fashion solutions in action. Discover how we can help transform your approach to circular fashion." />
+        <meta name="twitter:image" content="https://www.reyve.com/images/reyve-twitter-image-demo.jpg" />
+      </Helmet>
+      <div className="bg-white text-gray-800">
+        <Navbar />
       <main className="container mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-24">
         <div className="max-w-4xl mx-auto">
           <div className="text-center mb-12">
@@ -179,6 +202,7 @@ const BookADemoPage = () => {
       </main>
       <Footer />
     </div>
+    </>
   );
 };
 

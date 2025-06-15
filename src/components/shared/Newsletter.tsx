@@ -2,8 +2,6 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 const Newsletter: React.FC = () => {
-  // Functionality related to newsletter subscription has been removed.
-  // The button below can be linked to a booking/demo page or service.
 
   return (
     <section className="py-20 bg-white animate-on-scroll opacity-0">
@@ -13,17 +11,17 @@ const Newsletter: React.FC = () => {
             className="text-3xl md:text-4xl font-bold mb-4 text-gray-900"
             style={{ fontFamily: 'Brockmann, Inter, sans-serif' }}
           > 
-            Book a demo          
+            Book a Demo          
           </h2>
           <p className="text-lg text-gray-700 mb-8">
-          What if dead stock was not the end but your next best seller? 
+          What if dead stock was not the end<br className="hidden md:block" /> but your next best seller? 
           </p>
 
             <Link to="/book-a-demo">
               <button
                 className={`px-7 py-3 rounded-full text-white font-bold text-base transition-colors shadow-md focus:outline-none focus:ring-2 focus:ring-brand-600 bg-[#30f534] hover:bg-[#30f580]`}
               >
-                Book a demo
+                Book a Demo
               </button>
             </Link>
 

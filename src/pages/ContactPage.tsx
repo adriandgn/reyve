@@ -163,7 +163,7 @@ const ContactPage = () => {
                       </div>
                       <div>
                         <h3 className="text-lg font-medium text-gray-900">Email Us</h3>
-                        <p className="text-gray-600">anamaria@wereyve.com</p>
+                        <p className="text-gray-600">hello@wereyve.com</p>
                         <p className="text-sm text-gray-500 mt-1">We'll respond within 24 hours</p>
                       </div>
                     </div>
@@ -266,23 +266,6 @@ const ContactPage = () => {
             </div>
           </div>
         </section>
-
-
-        {/* Map Section */}
-        <section className="bg-gray-100">
-          <div className="h-96 w-full">
-            <iframe
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2428.409221990356!2d13.375996315807032!3d52.51626797981079!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47a851c6f687bd9f%3A0x8a4a2c8c2e3e3e1f!2sBrandenburg%20Gate!5e0!3m2!1sen!2sde!4v1620000000000!5m2!1sen!2sde"
-              width="100%"
-              height="100%"
-              style={{ border: 0 }}
-              allowFullScreen
-              loading="lazy"
-              title="Our Location"
-            ></iframe>
-          </div>
-        </section>
-
       </main>
         <RegenerateBanner />
         <Footer />

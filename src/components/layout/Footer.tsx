@@ -15,13 +15,10 @@ const Footer = () => {
       { name: 'Terms of Service', href: '/terms' },
     ],
     contact: [
-      { icon: <Mail className="h-5 w-5" />, text: 'anamaria@wereyve.com', href: 'mailto:anamaria@wereyve.com' },
+      { icon: <Mail className="h-5 w-5" />, text: 'hello@wereyve.com', href: 'mailto:hello@wereyve.com' },
     ],
     social: [
-      { icon: <Instagram className="h-5 w-5" />, name: 'Instagram', href: '#' },
-      { icon: <Twitter className="h-5 w-5" />, name: 'Twitter', href: '#' },
-      { icon: <Linkedin className="h-5 w-5" />, name: 'LinkedIn', href: '#' },
-      { icon: <Facebook className="h-5 w-5" />, name: 'Facebook', href: '#' },
+      { icon: <Linkedin className="h-5 w-5" />, name: 'LinkedIn', href: 'https://www.linkedin.com/company/reyve' },
     ],
   };
 
@@ -42,6 +39,8 @@ const Footer = () => {
                 <a
                   key={item.name}
                   href={item.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="text-gray-400 hover:text-white transition-colors duration-200"
                   aria-label={item.name}
                 >

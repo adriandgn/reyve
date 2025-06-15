@@ -47,14 +47,14 @@ const PrivacyPolicyPage = () => {
               <li>Correct or update your information</li>
               <li>Request deletion of your data at any time</li>
             </ul>
-            <p>To exercise these rights, simply email us at <a href="mailto:anamaria@wereyve.com" className="text-brand-600 hover:underline">anamaria@wereyve.com</a>.</p>
+            <p>To exercise these rights, simply email us at <a href="mailto:hello@wereyve.com" className="text-brand-600 hover:underline">hello@wereyve.com</a>.</p>
 
             <h2 className="text-2xl font-bold mt-12 mb-4">5. Contact</h2>
             <p>If you have any questions about this policy or how we handle your data, contact us at:</p>
             <address className="not-italic border-l-4 border-gray-200 pl-4">
               Re:YVE UG (haftungsbeschränkt)<br />
               Forster Strasse 57, 10999 Berlin<br />
-              Email: <a href="mailto:anamaria@wereyve.com" className="text-brand-600 hover:underline">anamaria@wereyve.com</a>
+              Email: <a href="mailto:hello@wereyve.com" className="text-brand-600 hover:underline">hello@wereyve.com</a>
             </address>
           </div>
         </div>

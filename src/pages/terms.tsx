@@ -52,7 +52,7 @@ const TermsOfServicePage = () => {
             <h2 className="text-2xl font-bold mt-12 mb-4">9. Contact</h2>
             <p>For questions about these Terms, contact us at:</p>
             <address className="not-italic border-l-4 border-gray-200 pl-4">
-              Email: <a href="mailto:anamaria@wereyve.com" className="text-brand-600 hover:underline">anamaria@wereyve.com</a><br />
+              Email: <a href="mailto:hello@wereyve.com" className="text-brand-600 hover:underline">hello@wereyve.com</a><br />
               Re:YVE UG (haftungsbeschränkt)<br />
               Forster Strasse 57, 10999 Berlin
             </address>
