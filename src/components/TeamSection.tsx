@@ -119,7 +119,7 @@ const TeamSection = () => {
         <div className="text-center max-w-3xl mx-auto mb-16">
           <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4" style={{ fontFamily: 'Brockmann, Inter, sans-serif' }}>Meet the Team</h2>
           <p className="text-lg text-gray-600">
-            Passionate individuals driving Re:YVE's mission to build the infrastructure to turn fashion’s linear product model into a regenerative cycle -from design to after-sale. 
+            Passionate individuals driving Re:YVE's mission to build the infrastructure that will turn fashion’s linear product model into a regenerative cycle -from design to after-sale. 
           </p>
         </div>
 
