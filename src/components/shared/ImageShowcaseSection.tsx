@@ -55,7 +55,6 @@ const ImageShowcaseSection = () => {
     </div>
     <div>
       <h3 className="font-brockmann text-xl font-bold text-circularity-navy mb-1">Data Consolidation & Inventory Insights </h3>
-      <div className="font-montserrat text-[#11b113] font-semibold mb-0.5">Fashion Brands</div>
       <p className="font-montserrat text-gray-700"><span>We integrate dead stock, style data and best sellers data into <b>structured, product packs</b> to enable digital redesign</span></p>
     </div>
   </div>
@@ -72,8 +71,7 @@ const ImageShowcaseSection = () => {
       <span className="text-white font-bold text-base drop-shadow group-hover:text-circularity-green group-hover:scale-110 transition-all duration-300" style={{textShadow: '0 1px 6px rgba(0,0,0,0.25)'}}>2</span>
     </div>
     <div>
-      <h3 className="font-brockmann text-xl font-bold text-circularity-navy mb-1">Data-Driven Digital Redesign Concepts</h3>
-      <div className="font-montserrat text-[#11b113] font-semibold mb-0.5">Redesigners</div>
+      <h3 className="font-brockmann text-xl font-bold text-circularity-navy mb-1">Data-Driven Digital Redesign Concepts</h3>  
       <p className="font-montserrat text-gray-700"><span>In close collaboration with the partner brand, accredited redesigners submit digital <b>upcycle concepts</b> aligned with each data pack -to outperform originals</span></p>
     </div>
   </div>
@@ -91,7 +89,6 @@ const ImageShowcaseSection = () => {
     </div>
     <div>
       <h3 className="font-brockmann text-xl font-bold text-circularity-navy mb-1">High volume redesign production</h3>
-      <div className="font-montserrat text-[#11b113] font-semibold mb-0.5">Makers</div>
       <p className="font-montserrat text-gray-700"><span>Approved redesigns are translated into scalable production by using redesign tech-packs based on Re:YVE´s unique metodology</span></p>
     </div>
   </div>
@@ -108,8 +105,7 @@ const ImageShowcaseSection = () => {
       <span className="text-white font-bold text-base drop-shadow group-hover:text-circularity-green group-hover:scale-110 transition-all duration-300" style={{textShadow: '0 1px 6px rgba(0,0,0,0.25)'}}>4</span>
     </div>
     <div>
-      <h3 className="font-brockmann text-xl font-bold text-circularity-navy mb-1">Market Re-introduction</h3>
-      <div className="font-montserrat text-[#11b113] font-semibold mb-0.5">Consumers</div>
+      <h3 className="font-brockmann text-xl font-bold text-circularity-navy mb-1">Market Re-introduction</h3>     
       <p className="font-montserrat text-gray-700"><span>Redesigned garments return as premium digital products sold with a story via brand and circular retail channels.
       </span></p>
     </div>

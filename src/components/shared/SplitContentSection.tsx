@@ -27,8 +27,8 @@ const SplitContentSection: React.FC = () => {
                 <h2 className="text-3xl lg:text-4xl xl:text-5xl font-display leading-tight">
                   <span style={{ letterSpacing: -1.5, lineHeight: 0.9, fontWeight: 'bold'}}>
                     <span style={{color: '#2c4c71'}}> Re:YVE is a product <br />life-extension platform <br />that enables </span>
-                    <span style={{color: '#30f534'}}>clothing-to-clothing</span>
-                    <span style={{color: '#2c4c71'}}> production at scale<br /> to turn unsold inventory <br />into new revenue.</span>
+                    <span style={{color: '#30f534'}}>clothing-to-clothing
+                     production at scale<br /> </span><span style={{color: '#2c4c71'}}>to turn unsold inventory <br />into new revenue.</span>
                   </span>
                 </h2>
               </motion.div>

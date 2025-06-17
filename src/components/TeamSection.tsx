@@ -38,7 +38,7 @@ const teamMembers = {
     {
       name: 'Josefina Coll',
       role: 'REDESIGNER, PRODUCT & STRATEGY',
-      bio: '15 years Fashion Upcycling as Atelier Owner & B2B Influencer.',
+      bio: '15 years Fashion Upcycling Entrepreneur & Educator.',
       image: '/profile4.png',
       linkedin: 'https://www.linkedin.com/in/josefinacoll/'
     },
