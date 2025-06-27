@@ -252,15 +252,14 @@ const SplitHumanoidSection = () => {
                 {/* Question on top */}
                 <div className="w-full flex flex-col items-center p-4 pt-6 pb-2 text-left">
                   <div className="text-base lg:text-2xl md:text-xl font-display text-[#1d3451] font-bold leading-tight mb-4 w-full">
-                    What does Re:YVE mean <span className="bg-white/60 px-2 py-1">for Fashion Consumers?</span>
+                  What does Re:YVE mean <span className="bg-white/60 px-2 py-1">for the Planet?</span>
                   </div>
                 </div>
                 {/* Answer below */}
                 <div className="w-full flex flex-col items-center p-4 pt-0 pb-6 text-left">
                   <div className="w-full">
                     <h3 className="text-base md:text-lg lg:text-4xl font-display text-[#1d3451] font-bold leading-tight">
-                    The way to enjoy stylish, high-quality fashion with a unique story - while effortlessly contributing to a more sustainable fashion future.
-                    <br /><span className="bg-white/60"> Look good. Feel good. Do good.</span>                </h3>
+                    The way to <span className="bg-white/60">align industry growth with social and environmental wellbeing</span> -by enhancing today’s value chains to cut waste, emissions, and water use, while elevating human skill and creativity.</h3>
                   </div>
                 </div>
               </div>
@@ -301,7 +300,7 @@ const SplitHumanoidSection = () => {
                 {/* Question on top */}
                 <div className="w-full flex flex-col items-center p-4 pt-6 pb-2 text-left">
                   <div className="text-base lg:text-2xl md:text-xl font-display text-[#1d3451] font-bold leading-tight mb-4 w-full">
-                    What does Re:YVE mean <span className="bg-white/60 px-2 py-1">for the Planet?</span>
+                  What does Re:YVE mean <span className="bg-white/60 px-2 py-1">for Fashion Consumers?</span>
                   </div>
                 </div>
                 {/* Answer below */}
