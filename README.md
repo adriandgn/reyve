@@ -2,15 +2,14 @@
 
 [![Vite](https://img.shields.io/badge/Vite-React-blueviolet?logo=vite)](https://vitejs.dev/) [![TypeScript](https://img.shields.io/badge/TypeScript-4.x-blue?logo=typescript)](https://www.typescriptlang.org/) [![TailwindCSS](https://img.shields.io/badge/Tailwind_CSS-3.x-38bdf8?logo=tailwindcss)](https://tailwindcss.com/)
 
-## Descripción
+## Description
 
-Re:YVE es una plataforma de extensión de vida para productos de moda que impulsa la circularidad y la regeneración en la industria textil. A través de tecnología, diseño y colaboración, Re:YVE transforma prendas existentes y excedentes de inventario en nuevas creaciones, permitiendo la producción de prenda-a-prenda a escala. Su misión es construir un nuevo estándar circular, generando valor sostenible y nuevas fuentes de ingresos para marcas y fabricantes, y fomentando una cultura de longevidad donde cada prenda cuenta una historia.
+Re:YVE is a product life-extension platform for fashion that drives circularity and regeneration in the textile industry. Through technology, design, and collaboration, Re:YVE transforms existing garments and surplus inventory into new creations, enabling clothing-to-clothing production at scale. Its mission is to build a new circular standard, generating sustainable value and new revenue streams for brands and manufacturers, and fostering a longevity culture where every piece tells a story.
 
+## Authors
 
-## Autores
+- Re:YVE Team
 
-- Equipo de Re:YVE
+## License
 
-## Licencia
-
-Este proyecto no especifica una licencia de código abierto en el repositorio. Si deseas reutilizar el código, por favor contacta a los autores o abre un issue para más información.
+This project does not specify an open source license in the repository. If you wish to reuse the code, please contact the authors or open an issue for more information.
