@@ -1,70 +1,16 @@
-# Welcome to your Lovable project
+# RE:YVE website
 
-## Project info
+[![Vite](https://img.shields.io/badge/Vite-React-blueviolet?logo=vite)](https://vitejs.dev/) [![TypeScript](https://img.shields.io/badge/TypeScript-4.x-blue?logo=typescript)](https://www.typescriptlang.org/) [![TailwindCSS](https://img.shields.io/badge/Tailwind_CSS-3.x-38bdf8?logo=tailwindcss)](https://tailwindcss.com/)
 
-**URL**: https://lovable.dev/projects/35d72d2e-6e25-40e5-9b0c-c0d1a7c1b727
+## Descripción
 
-## How can I edit this code?
+Re:YVE es una plataforma de extensión de vida para productos de moda que impulsa la circularidad y la regeneración en la industria textil. A través de tecnología, diseño y colaboración, Re:YVE transforma prendas existentes y excedentes de inventario en nuevas creaciones, permitiendo la producción de prenda-a-prenda a escala. Su misión es construir un nuevo estándar circular, generando valor sostenible y nuevas fuentes de ingresos para marcas y fabricantes, y fomentando una cultura de longevidad donde cada prenda cuenta una historia.
 
-There are several ways of editing your application.
 
-**Use Lovable**
+## Autores
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/35d72d2e-6e25-40e5-9b0c-c0d1a7c1b727) and start prompting.
+- Equipo de Re:YVE
 
-Changes made via Lovable will be committed automatically to this repo.
+## Licencia
 
-**Use your preferred IDE**
-
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
-
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
-
-Follow these steps:
-
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
-
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
-
-# Step 3: Install the necessary dependencies.
-npm i
-
-# Step 4: Start the development server with auto-reloading and an instant preview.
-npm run dev
-```
-
-**Edit a file directly in GitHub**
-
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
-
-**Use GitHub Codespaces**
-
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
-
-## What technologies are used for this project?
-
-This project is built with .
-
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
-
-## How can I deploy this project?
-
-Simply open [Lovable](https://lovable.dev/projects/35d72d2e-6e25-40e5-9b0c-c0d1a7c1b727) and click on Share -> Publish.
-
-## I want to use a custom domain - is that possible?
-
-We don't support custom domains (yet). If you want to deploy your project under your own domain then we recommend using Netlify. Visit our docs for more details: [Custom domains](https://docs.lovable.dev/tips-tricks/custom-domain/)
-# reyve
+Este proyecto no especifica una licencia de código abierto en el repositorio. Si deseas reutilizar el código, por favor contacta a los autores o abre un issue para más información.
